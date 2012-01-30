@@ -50,6 +50,14 @@ describe Cocaine::CommandLine do
     cmd.command.should == "mp3gain 'file 1.mp3' 'file 2.mp3' 'file 3.mp3'"
   end
 
+  it "can combine an array of files with 'normal' interpolation" do
+    cmd = Cocaine::CommandLine.new("mp3gain",
+                                   "-g :gain -f -r -c :files",
+                                   :gain => "2",
+                                   :files => ["file 1.mp3", "file 2.mp3", "file 3.mp3"])
+    cmd.command.should == "mp3gain -g '2' -f -r -c 'file 1.mp3' 'file 2.mp3' 'file 3.mp3'"
+  end
+
   it "quotes command line options differently if we're on windows" do
     on_windows!
     cmd = Cocaine::CommandLine.new("convert",
