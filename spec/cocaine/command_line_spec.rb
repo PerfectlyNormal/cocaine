@@ -36,6 +36,11 @@ describe Cocaine::CommandLine do
     cmd.command.should == "convert 'a.jpg' 'b.png'"
   end
 
+  it "can interpolate an array of files correctly" do
+    cmd = Cocaine::CommandLine.new("mp3gain", ":files", :files => %w[file1.mp3 file2.mp3 file3.mp3])
+    cmd.command.should == "mp3gain 'file1.mp3' 'file2.mp3' 'file3.mp3'"
+  end
+
   it "quotes command line options differently if we're on windows" do
     on_windows!
     cmd = Cocaine::CommandLine.new("convert",

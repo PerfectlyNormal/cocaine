@@ -83,6 +83,7 @@ module Cocaine
         if string.empty?
           "''"
         else
+          return string.map{|m| shell_quote(m) }.join(" ") if string.is_a?(Array)
           string.split("'").map{|m| "'#{m}'" }.join("\\'")
         end
       else
