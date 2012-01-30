@@ -28,6 +28,14 @@ line = Cocaine::CommandLine.new("convert", ":in -scale :resolution :out",
 line.command # => "convert 'omg.jpg' -scale '32x32' 'omg_thumb.jpg'"
 ```
 
+Passing in a list of files:
+
+```ruby
+line = Cocaine::CommandLine.new("mp3gain", ":files",
+                                :files => %w[file1.mp3 file2.mp3 file3.mp3])
+line.command # => "mp3gain 'file1.mp3' 'file2.mp3' 'file3.mp3'"
+```
+
 It prevents attempts at being bad:
 
 ```ruby
